@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Login from "./Pages/Auth/Login";
@@ -9,12 +9,23 @@ import ForgotPassword from "./Pages/Auth/ForgotPassword";
 import Complaint from "./Pages/User/Complaint";
 
 const App = () => {
+  const currentLocation = window.location.pathname;
   const reactQueryClient = new QueryClient({
     defaultOptions: {
       queries: {
         retry: false,
       },
     },
+  });
+
+  useEffect(() => {
+    if (currentLocation !== "/login") {
+      window.location.href = "/login";
+    } else if (currentLocation === "/login") {
+      window.location.href = "/login";
+    } else if (currentLocation === "/") {
+      window.location.href = "/login";
+    }
   });
   return (
     <div>
