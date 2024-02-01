@@ -21,8 +21,6 @@ const App = () => {
   useEffect(() => {
     if (currentLocation !== "/login") {
       window.location.href = "/login";
-    } else if (currentLocation === "/login") {
-      window.location.href = "/login";
     }
   });
   return (
