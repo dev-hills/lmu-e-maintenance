@@ -31,3 +31,15 @@ button:disabled {
   scrollbar-width: thin;
   scrollbar-color: transparent transparent; /* Firefox scrollbar color */
 }
+
+.react-datetime-picker__wrapper {
+  border: none;
+}
+
+.react-datetime-picker {
+  display: block;
+}
+
+.react-datetime-picker__inputGroup__input {
+  padding: 5px;
+}

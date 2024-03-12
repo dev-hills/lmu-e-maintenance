@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import VerifyEmail from "./Pages/Auth/VerifyEmail";
 import ForgotPassword from "./Pages/Auth/ForgotPassword";
 import Complaint from "./Pages/User/Complaint";
+import { AuthProvider } from "./context/AuthContext";
 
 const App = () => {
   const currentLocation = window.location.pathname;
@@ -19,23 +20,27 @@ const App = () => {
   });
 
   useEffect(() => {
-    if (currentLocation !== "/login") {
+    if (currentLocation !== "/login" && currentLocation !== "/verify-email") {
       window.location.href = "/login";
     }
-  });
+  }, [currentLocation]);
   return (
     <div>
       <QueryClientProvider client={reactQueryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/verify-email" element={<VerifyEmail />} />
-            <Route path="/forgotPassword" element={<ForgotPassword />} />
-            <Route path="/complaint" element={<Complaint />} />
-          </Routes>
-        </BrowserRouter>
+        <AuthProvider>
+          <BrowserRouter>
+            {/* <AuthProvider> */}
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/verify-email" element={<VerifyEmail />} />
+              <Route path="/forgotPassword" element={<ForgotPassword />} />
+              <Route path="/complaint" element={<Complaint />} />
+            </Routes>
+            {/* </AuthProvider> */}
+          </BrowserRouter>
+        </AuthProvider>
       </QueryClientProvider>
     </div>
   );

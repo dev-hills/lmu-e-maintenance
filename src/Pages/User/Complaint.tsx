@@ -6,10 +6,10 @@ import emoji from "/emoji.png";
 import MaintenanceIssueCategory from "../../Components/MaintenanceIssueCategory";
 const Complaint = () => {
   return (
-    <div className="px-[140px]">
+    <div className="px-[140px] sm:px-[10px]">
       <img src={logo} alt="" className="mx-auto" width={150} />
       <div className="flex flex-row items-center gap-[100px]">
-        <div className="w-[50%] flex flex-col items-start">
+        <div className="sm:hidden lg:hidden w-[50%] flex flex-col items-start">
           <h1 className="text-[#908585] text-[45px] font-bold">
             Please Report any Maintenance Issues
           </h1>
@@ -35,7 +35,7 @@ const Complaint = () => {
           </div>
         </div>
 
-        <div className="w-[50%] overflow-x-hidden scrollbar-hidden max-h-[600px]">
+        <div className="w-[40%] sm:w-[100%] lg:w-[100%] overflow-x-hidden scrollbar-hidden max-h-[600px] sm:max-h-[100%] lg:max-h-[100%]">
           <MaintenanceIssueCategory />
         </div>
       </div>

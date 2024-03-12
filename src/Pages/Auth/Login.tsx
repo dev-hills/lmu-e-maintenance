@@ -4,16 +4,17 @@ import ArrowRight from "../../asset/ArrowRight.svg";
 import logo from "/luscLogo.png";
 import helloBoy from "/helloBoy.png";
 import { Link } from "react-router-dom";
-import { useQueryClient } from "@tanstack/react-query";
+
 import { useLogin } from "../../hooks/mutations/auth";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import EmailModal from "../../Components/EmailModal";
+import { useAuth } from "../../hooks/useAuth";
 
 const Login = () => {
-  const queryClient = useQueryClient();
   const { mutate, isPending } = useLogin();
+  const { setToken, setUserEmail } = useAuth();
   const navigate = useNavigate();
   const [remember, setRemember] = useState<boolean>(false);
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -43,9 +44,8 @@ const Login = () => {
     mutate(dataToSend, {
       onSuccess: (res) => {
         console.log(res);
-        queryClient.invalidateQueries({
-          queryKey: ["Login"],
-        });
+        setToken(res?.token);
+        setUserEmail(res?.email);
 
         {
           toast.success(`Login Successful`, {
@@ -55,7 +55,17 @@ const Login = () => {
           navigate("/complaint");
         }
       },
-      onError: (err) => {
+      onError: (err: any) => {
+        err?.response?.status === 401 &&
+          toast.error("Invalid Username or Password", {
+            position: toast.POSITION.TOP_LEFT,
+          });
+
+        err?.request?.status === 0 &&
+          toast.error("No Internet Connection", {
+            position: toast.POSITION.TOP_LEFT,
+          });
+
         console.log(err);
       },
     });
