@@ -29,8 +29,8 @@ const EmailModal = ({ modalIsOpen, setIsOpen }: any) => {
     setIsOpen(false);
   }
 
-  const submit = (e) => {
-    e.preventDefault();
+  const submit = () => {
+    
     const dataToSend: any = {
       webMail: email,
     };
@@ -90,12 +90,12 @@ const EmailModal = ({ modalIsOpen, setIsOpen }: any) => {
             />
           </div>
 
-          <button
-            onClick={submit}
+          <div
+            onClick={() => submit}
             className="bg-[#008000] rounded-[50px] mt-[50px] py-[15px] px-[158px] w-[530px] md:w-[360px] text-white font-sansPro font-semibold text-[15px] leading-[15px]"
           >
             {isPending ? "Loading..." : "Submit"}
-          </button>
+          </div>
         </div>
       </Modal>
     </div>

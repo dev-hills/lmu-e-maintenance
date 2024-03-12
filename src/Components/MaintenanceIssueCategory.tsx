@@ -15,7 +15,7 @@ import { typeIssue } from "../utils/type";
 
 const MaintenanceIssueCategory = () => {
   const [value, onChange] = useState<Date>(new Date());
-  const [issueByCategoryId, setIssueByCategoryId] = useState<number | null>(
+  const [issueByCategoryId, setIssueByCategoryId] = useState<number>(
     null
   );
   const [categoryName, setCategoryName] = useState<string | null>(null);
